@@ -11,7 +11,8 @@ stage=0
 # The default data directories are for CLSP grid only.
 # Please modify them to your own directories.
 
-callhome_dir=/export/corpora/NIST/LDC2001S97/
+callhome_dir=~/data/nist_recognition_evaluation/
+musan_dir=~/data/ami/musan
 
 if [ $stage -le 0 ]; then
   # Prepare the Callhome portion of NIST SRE 2000.
@@ -41,7 +42,7 @@ if [ $stage -le 1 ]; then
   awk -F' ' -v dur="$uttdur" '{print $1, dur}' data/callhome_10s/wav.scp > data/callhome_10s/reco2dur
 
   # data augmentation
-  scripts/augmentation.sh --sample_rate 8000 --musan_dir /export/corpora/JHU/musan --prepare_musan false data/callhome_10s || exit 1;
+  scripts/augmentation.sh --sample_rate 8000 --musan_dir $musan_dir --prepare_musan true data/callhome_10s || exit 1;
   awk -F' ' -v dur="$uttdur" '{print $1, dur}' data/callhome_10s_combined/wav.scp > data/callhome_10s_combined/reco2dur
   # collect information for each 10s segment for training convenience
   scripts/create_record.sh --cmd "$train_cmd" --nj 10 data/callhome_10s_combined
