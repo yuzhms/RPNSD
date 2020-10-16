@@ -1,3 +1,4 @@
 RIRS_NOISES/**
 data/**
 tools/kaldi/**
+.idea/*

@@ -15,7 +15,7 @@ def main():
 
     with open("{}/label.scp".format(data_dir), 'w') as fh:
         for label_file in label_file_list:
-            uttname = label_file.split('.')[0]
+            uttname = os.path.splitext(label_file)[0]
             fh.write("{} {}/label/{}\n".format(uttname, abs_data_dir, label_file))
     return 0
 

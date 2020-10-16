@@ -15,7 +15,7 @@ def main():
 
     with open("{}/wav.scp".format(data_dir), 'w') as fh:
         for wav_file in wav_file_list:
-            uttname = wav_file.split('.')[0]
+            uttname = os.path.splitext(wav_file)[0]
             fh.write("{} {}/wav/{}\n".format(uttname, abs_data_dir, wav_file))
     return 0
 

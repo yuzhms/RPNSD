@@ -9,6 +9,7 @@ nj=40
 stage=0
 uttlen=10.0
 debug=0
+sample_rate=8000
 echo "$0 $@"  # Print the command line for logging
 
 if [ -f path.sh ]; then . ./path.sh; fi
@@ -38,7 +39,7 @@ fi
 if [ $stage -le 1 ]; then
   mkdir -p $dir/{log,tmp,wav,label} || exit 1;
   $cmd JOB=1:$nj $dir/log/split_utt.JOB.log \
-    python3 scripts/split_utt.py $sdata/JOB $dir --uttlen $uttlen --debug $debug 
+    python3 scripts/split_utt.py $sdata/JOB $dir --sample_rate $sample_rate --uttlen $uttlen --debug $debug
 fi
 
 if [ $stage -le 2 ]; then
